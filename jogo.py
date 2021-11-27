@@ -47,6 +47,13 @@ class velha(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
 
+
+clock = pygame.time.Clock()
+FPS = 30
+all_sprites = pygame.sprite.Group()
+player = velha(velha_img)
+all_sprites.add(velha)
+
 # ===== Loop principal =====
 while game:
     # ----- Trata eventos
@@ -65,16 +72,8 @@ while game:
     window.blit(velha_img, (400, 0))
     all_sprites.draw(window)
 
-
-clock = pygame.time.Clock()
-FPS = 30
-all_sprites = pygame.sprite.Group()
-player = velha(velha_img)
-all_sprites.add(velha)
-
-
     # ----- Atualiza estado do jogo
-    pygame.display.update()  # Mostra o novo frame para o jogador
+pygame.display.update()  # Mostra o novo frame para o jogador
 
 # ===== Finalização =====
 pygame.quit()  # Função do PyGame que finaliza os recursos utilizados
