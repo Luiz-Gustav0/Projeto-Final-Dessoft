@@ -26,7 +26,7 @@ carro2_img = pygame.image.load('Projeto-Final-Dessoft/imagens/imagem_carro.png')
 carro2_img = pygame.transform.scale(carro2_img, (115, 115))
 
 # Classe para criação do personagem principal
-class Velha(pygame.sprite.Sprite):
+class velha(pygame.sprite.Sprite):
     def __init__(self, img):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
@@ -63,7 +63,14 @@ while game:
     window.blit(carro1_img, (150, 0))
     window.blit(carro2_img, (300, 0))
     window.blit(velha_img, (400, 0))
+    all_sprites.draw(window)
 
+
+clock = pygame.time.Clock()
+FPS = 30
+all_sprites = pygame.sprite.Group()
+player = velha(velha_img)
+all_sprites.add(velha)
 
 
     # ----- Atualiza estado do jogo
