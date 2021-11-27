@@ -5,7 +5,7 @@ import pygame
 pygame.init()
 
 # ----- Gera tela principal
-window = pygame.display.set_mode((500, 400))
+window = pygame.display.set_mode((1280,720))
 pygame.display.set_caption('Hello World!')
 
 # ----- Inicia estruturas de dados
@@ -85,11 +85,10 @@ while game:
     window.blit(moto_img, (0, 0))
     window.blit(carro1_img, (150, 0))
     window.blit(carro2_img, (300, 0))
-    window.blit(velha_img, (400, 0))
     all_sprites.draw(window)
 
     # ----- Atualiza estado do jogo
-pygame.display.update()  # Mostra o novo frame para o jogador
+    pygame.display.update()  # Mostra o novo frame para o jogador
 
 # ===== Finalização =====
 pygame.quit()  # Função do PyGame que finaliza os recursos utilizados
