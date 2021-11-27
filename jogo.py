@@ -25,6 +25,28 @@ carro1_img = pygame.transform.scale(carro1_img, (150, 150))
 carro2_img = pygame.image.load('Projeto-Final-Dessoft/imagens/imagem_carro.png').convert_alpha()
 carro2_img = pygame.transform.scale(carro2_img, (115, 115))
 
+# Classe para criação do personagem principal
+class Velha(pygame.sprite.Sprite):
+    def __init__(self, img):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = velha_img
+        self.rect = self.image.get_rect()
+        self.rect.x = 603
+        self.rect.y = 450
+        self.speedx = 0
+
+    def update(self):
+        # Atualização da posição do Velha
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+        # Mantem dentro da tela
+        if self.rect.right > WIDTH:
+            self.rect.right = WIDTH
+        if self.rect.left < 0:
+            self.rect.left = 0
+
 # ===== Loop principal =====
 while game:
     # ----- Trata eventos
@@ -41,6 +63,8 @@ while game:
     window.blit(carro1_img, (150, 0))
     window.blit(carro2_img, (300, 0))
     window.blit(velha_img, (400, 0))
+
+
 
     # ----- Atualiza estado do jogo
     pygame.display.update()  # Mostra o novo frame para o jogador
