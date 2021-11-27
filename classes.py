@@ -19,7 +19,7 @@ carro2_img = pygame.transform.scale(carro2_img, (115, 115))
 
 
 # Classe para criação do personagem principal
-class Velha(pygame.sprite.Sprite):
+class velha(pygame.sprite.Sprite):
     def __init__(self, img):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
@@ -29,6 +29,7 @@ class Velha(pygame.sprite.Sprite):
         self.rect.x = 603
         self.rect.y = 450
         self.speedx = 0
+        self.speedy = 0
 
     def update(self):
         # Atualização da posição do Velha

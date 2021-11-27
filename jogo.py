@@ -36,6 +36,7 @@ class velha(pygame.sprite.Sprite):
         self.rect.x = 603
         self.rect.y = 450
         self.speedx = 0
+        self.speedy = 0
 
     def update(self):
         # Atualização da posição do Velha
@@ -51,8 +52,8 @@ class velha(pygame.sprite.Sprite):
 clock = pygame.time.Clock()
 FPS = 30
 all_sprites = pygame.sprite.Group()
-player = velha(velha_img)
-all_sprites.add(velha)
+velha1 = velha(velha_img)
+all_sprites.add(velha1)
 
 # ===== Loop principal =====
 while game:
@@ -64,17 +65,17 @@ while game:
     # Verifica se apertou alguma tecla.
         if event.type == pygame.KEYDOWN:
     # Dependendo da tecla, altera a velocidade.
-        if event.key == pygame.K_LEFT:
-            player.speedx -= 1
-        if event.key == pygame.K_RIGHT:
-            player.speedx += 1
+            if event.key == pygame.K_LEFT:
+                velha1.speedx -= 1
+            if event.key == pygame.K_RIGHT:
+                velha1.speedx += 1
         # Verifica se soltou alguma tecla.
         if event.type == pygame.KEYUP:
         # Dependendo da tecla, altera a velocidade.
             if event.key == pygame.K_LEFT:
-                player.speedx += 1
+                velha1.speedx += 1
             if event.key == pygame.K_RIGHT:
-                player.speedx -= 1
+                velha1.speedx -= 1
 
     # ----- Gera saídas
     all_sprites.update()
