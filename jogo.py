@@ -61,8 +61,23 @@ while game:
         # ----- Verifica consequências
         if event.type == pygame.QUIT:
             game = False
+    # Verifica se apertou alguma tecla.
+        if event.type == pygame.KEYDOWN:
+    # Dependendo da tecla, altera a velocidade.
+        if event.key == pygame.K_LEFT:
+            player.speedx -= 1
+        if event.key == pygame.K_RIGHT:
+            player.speedx += 1
+        # Verifica se soltou alguma tecla.
+        if event.type == pygame.KEYUP:
+        # Dependendo da tecla, altera a velocidade.
+            if event.key == pygame.K_LEFT:
+                player.speedx += 1
+            if event.key == pygame.K_RIGHT:
+                player.speedx -= 1
 
     # ----- Gera saídas
+    all_sprites.update()
     window.fill((0, 0, 0))  # Preenche com a cor azul
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(background, (0, 0))
