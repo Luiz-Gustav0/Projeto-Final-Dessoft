@@ -91,16 +91,16 @@ while game:
         if event.type == pygame.KEYDOWN:
     # Dependendo da tecla, altera a velocidade.
             if event.key == pygame.K_LEFT:
-                velha1.speedx -= 1
+                velha1.speedx -= 8
             if event.key == pygame.K_RIGHT:
-                velha1.speedx += 1
+                velha1.speedx += 8
         # Verifica se soltou alguma tecla.
         if event.type == pygame.KEYUP:
         # Dependendo da tecla, altera a velocidade.
             if event.key == pygame.K_LEFT:
-                velha1.speedx += 1
+                velha1.speedx += 8
             if event.key == pygame.K_RIGHT:
-                velha1.speedx -= 1
+                velha1.speedx -= 8
 
     # ----- Gera saídas
     all_sprites.update()
