@@ -48,6 +48,10 @@ class velha(pygame.sprite.Sprite):
             self.rect.right = WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
+        if self.rect.y > 525:
+            self.rect.y = 525
+        if self.rect.y < 250:
+            self.rect.y = 250
 
 class Moto(pygame.sprite.Sprite):
     def __init__(self, img):
@@ -166,6 +170,10 @@ while game:
                 velha1.speedx -= 8
             if event.key == pygame.K_RIGHT:
                 velha1.speedx += 8
+            if event.key == pygame.K_UP:
+                velha1.speedy -= 8
+            if event.key == pygame.K_DOWN:
+                velha1.speedy += 8
         # Verifica se soltou alguma tecla.
         if event.type == pygame.KEYUP:
         # Dependendo da tecla, altera a velocidade.
@@ -173,6 +181,10 @@ while game:
                 velha1.speedx += 8
             if event.key == pygame.K_RIGHT:
                 velha1.speedx -= 8
+            if event.key == pygame.K_UP:
+                velha1.speedy += 8
+            if event.key == pygame.K_DOWN:
+                velha1.speedy -= 8
 
     # ----- Gera saídas
     all_sprites.update()
