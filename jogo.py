@@ -3,6 +3,8 @@
 import pygame
 import random
 
+from pygame.constants import DOUBLEBUF
+
 pygame.init()
 
 # ----- Gera tela principal
@@ -14,6 +16,7 @@ WIDTH = 1280
 HEIGHT = 720
 BLACK = (0, 0, 0)
 game = True
+dificuldade = 1
 assets = {}
 background = pygame.image.load('Projeto-Final-Dessoft/imagens/background.png').convert()
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
@@ -151,7 +154,9 @@ velha1 = velha(velha_img)
 moto1 = Moto(moto_img)
 carro1 = Carro1(carro1_img)
 carro2 = Carro2(carro2_img)
-todos_carros_e_motos.add(moto1)
+for i in range(dificuldade):
+    moto1 = Moto(moto_img)
+    todos_carros_e_motos.add(moto1)
 todos_carros_e_motos.add(carro1)
 todos_carros_e_motos.add(carro2)
 todos_sprites.add(carro1)
@@ -195,6 +200,9 @@ while game:
     hits = pygame.sprite.spritecollide(velha1, todos_carros_e_motos, True, collided=pygame.sprite.collide_mask)
     if len(hits) > 0:
         game = False
+    if pygame.time.get_ticks() > 5000:
+        dificuldade += 1
+        print(dificuldade)
     window.fill((0, 0, 0))  # Preenche com a cor azul
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(background, (0, 0))
