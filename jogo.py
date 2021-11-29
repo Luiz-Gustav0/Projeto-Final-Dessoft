@@ -49,32 +49,6 @@ class velha(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
 
-
-# Classe para criação da moto
-class Moto(pygame.sprite.Sprite):
-    def __init__(self, img):
-        # Construtor da classe mãe (Sprite).
-        pygame.sprite.Sprite.__init__(self)
-
-        self.image = moto_img
-        self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0, WIDTH-100)
-        self.rect.y = -100
-        self.speedx = random.randint(-3, 3)
-        self.speedy = random.randint(4, 6)
-
-    def update(self):
-        # Atualizando a posição da moto
-        self.rect.x += self.speedx
-        self.rect.y += self.speedy
-        # Se a moto passar do final da tela, volta para cima e sorteia
-        # novas posições e velocidades
-        if self.rect.top > HEIGHT or self.rect.right < 0 or self.rect.left > WIDTH:
-            self.rect.x = random.randint(0, WIDTH-100)
-            self.rect.y = -100
-            self.speedx = random.randint(-3, 3)
-            self.speedy = random.randint(2, 6)
-
 class Moto(pygame.sprite.Sprite):
     def __init__(self, img):
         # Construtor da classe mãe (Sprite).
@@ -132,13 +106,48 @@ class Carro1(pygame.sprite.Sprite):
             self.rect.y = random.randint(250,525)
             self.speedy = 0
 
+# Classe para criação do carro 2
+class Carro2(pygame.sprite.Sprite):
+    def __init__(self, img):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = carro2_img
+        self.rect = self.image.get_rect()
+        posicoes = [-150, 1280]
+        self.rect.x = random.choice(posicoes)
+        if self.rect.x == -150:
+            self.speedx = random.randint(3,4)
+        if self.rect.x == 1280:
+            self.speedx = random.randint(-4,-3)
+        self.rect.y = random.randint(250,525)
+        self.speedy = 0
+
+    def update(self):
+        # Atualizando a posição do carro
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+        # Se o carro passar do final da tela, volta para cima e sorteia
+        # novas posições e velocidades
+        if self.rect.right < 0 or self.rect.left > WIDTH:
+            posicoes = [-150, 1280]
+            self.rect.x = random.choice(posicoes)
+            if self.rect.x == -150:
+                self.speedx = random.randint(3,5)
+            if self.rect.x == 1280:
+                self.speedx = random.randint(-5,-3)
+            self.rect.y = random.randint(250,525)
+            self.speedy = 0
+
 clock = pygame.time.Clock()
 FPS = 30
 all_sprites = pygame.sprite.Group()
 velha1 = velha(velha_img)
 moto1 = Moto(moto_img)
 carro1 = Carro1(carro1_img)
+carro2 = Carro2(carro2_img)
 all_sprites.add(carro1)
+all_sprites.add(carro2)
 all_sprites.add(moto1)
 all_sprites.add(velha1)
 
@@ -170,8 +179,6 @@ while game:
     window.fill((0, 0, 0))  # Preenche com a cor azul
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(background, (0, 0))
-    window.blit(carro1_img, (150, 0))
-    window.blit(carro2_img, (300, 0))
     all_sprites.draw(window)
 
     # ----- Atualiza estado do jogo

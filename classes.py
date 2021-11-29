@@ -99,3 +99,36 @@ class Carro1(pygame.sprite.Sprite):
             self.rect.y = random.randint(250,525)
             self.speedy = 0
 
+# Classe para criação do carro 2
+class Carro2(pygame.sprite.Sprite):
+    def __init__(self, img):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = carro2_img
+        self.rect = self.image.get_rect()
+        posicoes = [-150, 1280]
+        self.rect.x = random.choice(posicoes)
+        if self.rect.x == -150:
+            self.speedx = random.randint(3,4)
+        if self.rect.x == 1280:
+            self.speedx = random.randint(-4,-3)
+        self.rect.y = random.randint(250,525)
+        self.speedy = 0
+
+    def update(self):
+        # Atualizando a posição do carro
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+        # Se o carro passar do final da tela, volta para cima e sorteia
+        # novas posições e velocidades
+        if self.rect.right < 0 or self.rect.left > WIDTH:
+            posicoes = [-150, 1280]
+            self.rect.x = random.choice(posicoes)
+            if self.rect.x == -150:
+                self.speedx = random.randint(3,5)
+            if self.rect.x == 1280:
+                self.speedx = random.randint(-5,-3)
+            self.rect.y = random.randint(250,525)
+            self.speedy = 0
+
