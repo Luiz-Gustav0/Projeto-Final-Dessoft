@@ -48,10 +48,10 @@ class velha(pygame.sprite.Sprite):
             self.rect.right = WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
-        if self.rect.y > 525:
-            self.rect.y = 525
-        if self.rect.y < 250:
-            self.rect.y = 250
+        if self.rect.y > 610:
+            self.rect.y = 610
+        if self.rect.y < 0:
+            self.rect.y = 0
 
 class Moto(pygame.sprite.Sprite):
     def __init__(self, img):
@@ -145,15 +145,19 @@ class Carro2(pygame.sprite.Sprite):
 
 clock = pygame.time.Clock()
 FPS = 30
-all_sprites = pygame.sprite.Group()
+todos_sprites = pygame.sprite.Group()
+todos_carros_e_motos = pygame.sprite.Group()
 velha1 = velha(velha_img)
 moto1 = Moto(moto_img)
 carro1 = Carro1(carro1_img)
 carro2 = Carro2(carro2_img)
-all_sprites.add(carro1)
-all_sprites.add(carro2)
-all_sprites.add(moto1)
-all_sprites.add(velha1)
+todos_carros_e_motos.add(moto1)
+todos_carros_e_motos.add(carro1)
+todos_carros_e_motos.add(carro2)
+todos_sprites.add(carro1)
+todos_sprites.add(carro2)
+todos_sprites.add(moto1)
+todos_sprites.add(velha1)
 
 # ===== Loop principal =====
 while game:
@@ -187,11 +191,14 @@ while game:
                 velha1.speedy -= 8
 
     # ----- Gera saídas
-    all_sprites.update()
+    todos_sprites.update()
+    hits = pygame.sprite.spritecollide(velha1, todos_carros_e_motos, True)
+    if len(hits) > 0:
+        game = False
     window.fill((0, 0, 0))  # Preenche com a cor azul
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(background, (0, 0))
-    all_sprites.draw(window)
+    todos_sprites.draw(window)
 
     # ----- Atualiza estado do jogo
     pygame.display.update()  # Mostra o novo frame para o jogador
