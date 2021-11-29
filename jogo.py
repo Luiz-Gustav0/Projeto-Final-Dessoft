@@ -192,7 +192,7 @@ while game:
 
     # ----- Gera saídas
     todos_sprites.update()
-    hits = pygame.sprite.spritecollide(velha1, todos_carros_e_motos, True)
+    hits = pygame.sprite.spritecollide(velha1, todos_carros_e_motos, True, collided=pygame.sprite.collide_mask)
     if len(hits) > 0:
         game = False
     window.fill((0, 0, 0))  # Preenche com a cor azul
