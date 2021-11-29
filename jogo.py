@@ -1,6 +1,7 @@
 # ===== Inicialização =====
 # ----- Importa e inicia pacotes
 import pygame
+import random
 
 pygame.init()
 
@@ -91,16 +92,16 @@ while game:
         if event.type == pygame.KEYDOWN:
     # Dependendo da tecla, altera a velocidade.
             if event.key == pygame.K_LEFT:
-                velha1.speedx -= 8
+                velha1.speedx -= 1.5
             if event.key == pygame.K_RIGHT:
-                velha1.speedx += 8
+                velha1.speedx += 1.5
         # Verifica se soltou alguma tecla.
         if event.type == pygame.KEYUP:
         # Dependendo da tecla, altera a velocidade.
             if event.key == pygame.K_LEFT:
-                velha1.speedx += 8
+                velha1.speedx += 1.5
             if event.key == pygame.K_RIGHT:
-                velha1.speedx -= 8
+                velha1.speedx -= 1.5
 
     # ----- Gera saídas
     all_sprites.update()
