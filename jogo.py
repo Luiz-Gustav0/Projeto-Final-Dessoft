@@ -78,6 +78,8 @@ clock = pygame.time.Clock()
 FPS = 30
 all_sprites = pygame.sprite.Group()
 velha1 = velha(velha_img)
+moto1 = Moto(moto_img)
+all_sprites.add(moto1)
 all_sprites.add(velha1)
 
 # ===== Loop principal =====
