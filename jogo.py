@@ -9,7 +9,7 @@ pygame.init()
 
 # ----- Gera tela principal
 window = pygame.display.set_mode((1280,720))
-pygame.display.set_caption('Hello World!')
+pygame.display.set_caption('Crazy Drivers!')
 
 # ----- Inicia estruturas de dados
 WIDTH = 1280
@@ -18,6 +18,7 @@ BLACK = (0, 0, 0)
 game = True
 dificuldade = 0
 font = pygame.font.SysFont('impact', 48)
+font_principal = pygame.font.SysFont('Bodoni', 48)
 assets = {}
 background = pygame.image.load('Projeto-Final-Dessoft/imagens/background.png').convert()
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
@@ -37,7 +38,11 @@ def init_screen(screen):
     # Carrega o fundo da tela inicial
     window = pygame.display.set_mode((WIDTH, HEIGHT))
     window.fill((255, 255, 255))
-
+    welcome = font_principal.render('Welcome to Crazy Drivers!', True, (255, 0, 0))
+    desejajogar = font_principal.render('Aperte uma tecla para iniciar!', True, (255, 0, 0))
+    window.blit(welcome,(100, 100))
+    window.blit(desejajogar, (400, 200))
+    
     running = True
     while running:
 
