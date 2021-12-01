@@ -17,7 +17,7 @@ HEIGHT = 720
 BLACK = (0, 0, 0)
 game = True
 dificuldade = 0
-font = pygame.font.SysFont(None, 48)
+font = pygame.font.SysFont('impact', 48)
 assets = {}
 background = pygame.image.load('Projeto-Final-Dessoft/imagens/background.png').convert()
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
@@ -162,42 +162,46 @@ todos_sprites.add(velha1)
 
 # ===== Loop principal =====
 contador = 0
-while game:
-    contador += 1
-    clock.tick(FPS)
-    # ----- Trata eventos
-    for event in pygame.event.get():
-        # ----- Verifica consequências
-        if event.type == pygame.QUIT:
-            game = False
-    # Verifica se apertou alguma tecla.
-        if event.type == pygame.KEYDOWN:
-    # Dependendo da tecla, altera a velocidade.
-            if event.key == pygame.K_LEFT:
-                velha1.speedx -= 8
-            if event.key == pygame.K_RIGHT:
-                velha1.speedx += 8
-            if event.key == pygame.K_UP:
-                velha1.speedy -= 8
-            if event.key == pygame.K_DOWN:
-                velha1.speedy += 8
-        # Verifica se soltou alguma tecla.
-        if event.type == pygame.KEYUP:
+estado = 'inicial'
+while estado != 'sair':
+    while estado == 'inicial':
+        estado = 'game'
+    while estado == 'game':
+        contador += 1
+        clock.tick(FPS)
+        # ----- Trata eventos
+        for event in pygame.event.get():
+            # ----- Verifica consequências
+            if event.type == pygame.QUIT:
+                estado = 'sair'
+        # Verifica se apertou alguma tecla.
+            if event.type == pygame.KEYDOWN:
         # Dependendo da tecla, altera a velocidade.
-            if event.key == pygame.K_LEFT:
-                velha1.speedx += 8
-            if event.key == pygame.K_RIGHT:
-                velha1.speedx -= 8
-            if event.key == pygame.K_UP:
-                velha1.speedy += 8
-            if event.key == pygame.K_DOWN:
-                velha1.speedy -= 8
+                if event.key == pygame.K_LEFT:
+                    velha1.speedx -= 8
+                if event.key == pygame.K_RIGHT:
+                    velha1.speedx += 8
+                if event.key == pygame.K_UP:
+                    velha1.speedy -= 8
+                if event.key == pygame.K_DOWN:
+                    velha1.speedy += 8
+            # Verifica se soltou alguma tecla.
+            if event.type == pygame.KEYUP:
+            # Dependendo da tecla, altera a velocidade.
+                if event.key == pygame.K_LEFT:
+                    velha1.speedx += 8
+                if event.key == pygame.K_RIGHT:
+                    velha1.speedx -= 8
+                if event.key == pygame.K_UP:
+                    velha1.speedy += 8
+                if event.key == pygame.K_DOWN:
+                    velha1.speedy -= 8
 
     # ----- Gera saídas
     todos_sprites.update()
     hits = pygame.sprite.spritecollide(velha1, todos_carros_e_motos, True, collided=pygame.sprite.collide_mask)
     if len(hits) > 0:
-        game = False
+        estado = 'inicial'
     if contador % 300 == 0:
         dificuldade += 1
         moto1 = Moto(moto_img)
@@ -207,8 +211,8 @@ while game:
     if contador > 1500:
         contador = 1501
     window.blit(background, (0, 0))
-    dificuldadestr = 'Dificuldade: {}'.format(dificuldade)
-    texto = font.render(dificuldadestr, True, (0, 255, 0))
+    dificuldade = 'Dificuldade: {}'.format(dificuldade)
+    texto = font.render(dificuldade, True, (0, 255, 0))
     window.blit(texto, (100, 100))
     todos_sprites.draw(window)
 
