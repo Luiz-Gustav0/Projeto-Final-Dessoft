@@ -16,7 +16,8 @@ WIDTH = 1280
 HEIGHT = 720
 BLACK = (0, 0, 0)
 game = True
-dificuldade = 1
+dificuldade = 0
+font = pygame.font.SysFont(None, 48)
 assets = {}
 background = pygame.image.load('Projeto-Final-Dessoft/imagens/background.png').convert()
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
@@ -204,13 +205,18 @@ while game:
     if len(hits) > 0:
         game = False
     if contador % 300 == 0:
-        contador = 0
+        dificuldade += 1
         moto1 = Moto(moto_img)
         todos_sprites.add(moto1)
         todos_carros_e_motos.add(moto1)
     window.fill((0, 0, 0))  # Preenche com a cor azul
     window.fill((0, 0, 0))  # Preenche com a cor branca
+    if contador > 1500:
+        contador = 1501
     window.blit(background, (0, 0))
+    dificuldadestr = 'Dificuldade: {}'.format(dificuldade)
+    texto = font.render(dificuldadestr, True, (0, 255, 0))
+    window.blit(texto, (100, 100))
     todos_sprites.draw(window)
 
     # ----- Atualiza estado do jogo
