@@ -59,14 +59,18 @@ todos_sprites.add(velha1)
 contador = 0
 estado = 'inicial'
 while estado != 'sair':
+    #Mostrando tela inicial
     while estado == 'inicial':
         estado = init_screen(window)
+    #Mostrando a tela do jogo
     while estado == 'game':
         window = pygame.display.set_mode((1280,720))
         pygame.display.set_caption('Crazy Drivers!')
         todos_sprites.update()
         hits = pygame.sprite.spritecollide(velha1, todos_carros_e_motos, True, collided=pygame.sprite.collide_mask)
+        # Verifica se a Velha bateu em algum carro ou moto
         if len(hits) > 0:
+            #reinicia todo jogo após uma colisão
             for elemento in todos_sprites.sprites():
                 elemento.kill()
             velha1 = velha(velha_img)
@@ -84,14 +88,17 @@ while estado != 'sair':
             contador = 0
             assets['velhaatropelada'].play()
             estado = perdeu_screen(window)
+        #criando um jeito de mudar a dificuldade a cada 5 segundos (150FPS)
         if contador % 150 == 0:
             dificuldade += 1
             moto1 = Moto(moto_img)
             todos_sprites.add(moto1)
             todos_carros_e_motos.add(moto1)
         window.fill((0, 0, 0)) 
+        #Colocando um limite máximo na dificuldade
         if contador > 4500:
             contador = 4501
+        #Printando a dificuldade na tela
         window.blit(background, (0, 0))
         dificuldades = 'Dificuldade: {}'.format(dificuldade)
         texto = font.render(dificuldades, True, (255, 0, 0))
