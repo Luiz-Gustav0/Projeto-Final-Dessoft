@@ -42,9 +42,11 @@ def init_screen(screen):
     window.fill((0, 0, 0))
     welcome = font_principal.render('Welcome to Crazy Drivers!', True, (255, 0, 0))
     desejajogar = font_principal.render('Aperte ENTER para iniciar!', True, (255, 0, 0))
+    Instrucoes = font_principal.render('Véspera de ano novo e os motoristas estão loucos, ajude a velinha a não ser atropelada!', True, (255, 0, 0))
     window.blit(velha_img,(640, 500))
-    window.blit(welcome,(100, 300))
-    window.blit(desejajogar, (100, 400))
+    window.blit(welcome,(100, 200))
+    window.blit(Instrucoes, (100, 350))
+    window.blit(desejajogar, (100, 275))
     
     running = True
     while running:
