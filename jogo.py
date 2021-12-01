@@ -253,6 +253,21 @@ while estado != 'sair':
         todos_sprites.update()
         hits = pygame.sprite.spritecollide(velha1, todos_carros_e_motos, True, collided=pygame.sprite.collide_mask)
         if len(hits) > 0:
+            for elemento in todos_sprites.sprites():
+                elemento.kill()
+            velha1 = velha(velha_img)
+            carro1 = Carro1(carro1_img)
+            carro3 = Carro1(carro1_img)
+            carro2 = Carro2(carro2_img)
+            todos_carros_e_motos.add(carro1)
+            todos_carros_e_motos.add(carro2)
+            todos_carros_e_motos.add(carro3)
+            todos_sprites.add(carro1)
+            todos_sprites.add(carro2)
+            todos_sprites.add(carro3)
+            todos_sprites.add(velha1)
+            dificuldade = 0
+            contador = 0
             assets['velhaatropelada'].play()
             estado = perdeu_screen(window)
         if contador % 150 == 0:
