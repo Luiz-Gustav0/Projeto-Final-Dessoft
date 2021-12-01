@@ -121,14 +121,14 @@ class Carro2(pygame.sprite.Sprite):
 
         self.image = carro2_img
         self.rect = self.image.get_rect()
-        posicoes = [-150, 1280]
-        self.rect.x = random.choice(posicoes)
-        if self.rect.x == -150:
-            self.speedx = random.randint(3,4)
-        if self.rect.x == 1280:
-            self.speedx = random.randint(-4,-3)
-        self.rect.y = random.randint(250,525)
-        self.speedy = 0
+        posicoes = [0, 1280]
+        self.rect.y = random.choice(posicoes)
+        if self.rect.y == -150:
+            self.speedy = random.randint(3,4)
+        if self.rect.y == 1280:
+            self.speedy = random.randint(-4,-3)
+        self.rect.x = random.randint(250,525)
+        self.speedx = 0
 
     def update(self):
         # Atualizando a posição do carro
@@ -136,15 +136,15 @@ class Carro2(pygame.sprite.Sprite):
         self.rect.y += self.speedy
         # Se o carro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
-        if self.rect.right < 0 or self.rect.left > WIDTH:
-            posicoes = [-150, 1280]
-            self.rect.x = random.choice(posicoes)
-            if self.rect.x == -150:
-                self.speedx = random.randint(3,5)
-            if self.rect.x == 1280:
-                self.speedx = random.randint(-5,-3)
-            self.rect.y = random.randint(250,525)
-            self.speedy = 0
+        if self.rect.bottom < 0 or self.rect.top > WIDTH:
+            posicoes = [0, 720]
+            self.rect.y = random.choice(posicoes)
+            if self.rect.y == -150:
+                self.speedy = random.randint(3,5)
+            if self.rect.y == 1280:
+                self.speedy = random.randint(-5,-3)
+            self.rect.x = random.randint(250,525)
+            self.speedx = 0
 
 clock = pygame.time.Clock()
 FPS = 30
@@ -154,13 +154,16 @@ velha1 = velha(velha_img)
 moto1 = Moto(moto_img)
 carro1 = Carro1(carro1_img)
 carro2 = Carro2(carro2_img)
+carro3 = Carro1(carro1_img)
 for i in range(dificuldade):
     moto1 = Moto(moto_img)
     todos_carros_e_motos.add(moto1)
 todos_carros_e_motos.add(carro1)
 todos_carros_e_motos.add(carro2)
+todos_carros_e_motos.add(carro3)
 todos_sprites.add(carro1)
 todos_sprites.add(carro2)
+todos_sprites.add(carro3)
 todos_sprites.add(moto1)
 todos_sprites.add(velha1)
 
@@ -202,7 +205,6 @@ while game:
         game = False
     if pygame.time.get_ticks() > 5000:
         dificuldade += 1
-        print(dificuldade)
     window.fill((0, 0, 0))  # Preenche com a cor azul
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(background, (0, 0))
