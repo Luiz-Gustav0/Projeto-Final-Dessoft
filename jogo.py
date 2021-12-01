@@ -137,7 +137,7 @@ class Carro2(pygame.sprite.Sprite):
         # Se o carro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
         if self.rect.bottom < 0 or self.rect.top > WIDTH:
-            posicoes = [0, 720]
+            posicoes = [0, 1280]
             self.rect.y = random.choice(posicoes)
             if self.rect.y == -150:
                 self.speedy = random.randint(3,5)
@@ -155,20 +155,20 @@ moto1 = Moto(moto_img)
 carro1 = Carro1(carro1_img)
 carro2 = Carro2(carro2_img)
 carro3 = Carro1(carro1_img)
-for i in range(dificuldade):
-    moto1 = Moto(moto_img)
-    todos_carros_e_motos.add(moto1)
 todos_carros_e_motos.add(carro1)
 todos_carros_e_motos.add(carro2)
 todos_carros_e_motos.add(carro3)
+todos_carros_e_motos.add(moto1)
+todos_sprites.add(moto1)
 todos_sprites.add(carro1)
 todos_sprites.add(carro2)
 todos_sprites.add(carro3)
-todos_sprites.add(moto1)
 todos_sprites.add(velha1)
 
 # ===== Loop principal =====
+contador = 0
 while game:
+    contador += 1
     clock.tick(FPS)
     # ----- Trata eventos
     for event in pygame.event.get():
@@ -203,8 +203,11 @@ while game:
     hits = pygame.sprite.spritecollide(velha1, todos_carros_e_motos, True, collided=pygame.sprite.collide_mask)
     if len(hits) > 0:
         game = False
-    if pygame.time.get_ticks() > 5000:
-        dificuldade += 1
+    if contador % 300 == 0:
+        contador = 0
+        moto1 = Moto(moto_img)
+        todos_sprites.add(moto1)
+        todos_carros_e_motos.add(moto1)
     window.fill((0, 0, 0))  # Preenche com a cor azul
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(background, (0, 0))
