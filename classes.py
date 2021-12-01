@@ -2,6 +2,7 @@ import pygame
 import random
 
 pygame.init()
+# Estrtura inicial dos dados
 window = pygame.display.set_mode((1280,720))
 pygame.display.set_caption('Crazy Drivers!')
 WIDTH = 1280
@@ -34,9 +35,11 @@ def init_screen(screen):
 
     # Carrega o fundo da tela inicial
     window.fill((0, 0, 0))
+    # Criação dos textos
     welcome = font_principal.render('Welcome to Crazy Drivers!', True, (255, 0, 0))
     desejajogar = font_principal.render('Aperte ENTER para iniciar!', True, (255, 0, 0))
     Instrucoes = font_principal2.render('Véspera de ano novo e os motoristas estão loucos, ajude a velinha a não ser atropelada!', True, (255, 0, 0))
+    # Printando os textos na tela 
     window.blit(velha_img,(640, 500))
     window.blit(welcome,(100, 150))
     window.blit(Instrucoes, (70, 400))
@@ -54,10 +57,11 @@ def init_screen(screen):
             if event.type == pygame.QUIT:
                 estado = 'sair'
                 running = False
-
+                # Verifica se a tecla enter foi apertada
             if event.type == pygame.KEYUP:
                 estado = 'game'
                 if event.key == pygame.K_RETURN:
+                    # Inicia som do jogo
                     pygame.mixer.music.play()
                     estado = 'game'
                     running = False
@@ -68,15 +72,20 @@ def init_screen(screen):
 
     return estado
 
+# Função que cria tela final
 def perdeu_screen(screen):
     # Variável para o ajuste de velocidade
-    pygame.mixer.music.stop()
     clock = pygame.time.Clock()
+    # Parando som
+    pygame.mixer.music.stop()
 
     # Carrega o fundo da tela inicial
     window = pygame.display.set_mode((WIDTH, HEIGHT))
+    # Criação dos textos
     textoperdeu = font_principal.render('Voce perdeu!', True, (255, 0, 0))
     querjogardnv = font_principal.render('Aperte qualquer tecla para jogar novamente!', True, (255, 0, 0))
+
+    # Pritando os textos na tela final
     window.blit(background, (0, 0))
     window.blit(textoperdeu, (100, 300))
     window.blit(querjogardnv, (100, 400))
