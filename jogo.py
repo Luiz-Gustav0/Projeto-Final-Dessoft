@@ -19,6 +19,7 @@ game = True
 dificuldade = 0
 font = pygame.font.SysFont('impact', 48)
 font_principal = pygame.font.SysFont('Bodoni', 48)
+font_principal2 = pygame.font.SysFont('Bodoni', 33)
 assets = {}
 background = pygame.image.load('Projeto-Final-Dessoft/imagens/background.png').convert()
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
@@ -42,11 +43,11 @@ def init_screen(screen):
     window.fill((0, 0, 0))
     welcome = font_principal.render('Welcome to Crazy Drivers!', True, (255, 0, 0))
     desejajogar = font_principal.render('Aperte ENTER para iniciar!', True, (255, 0, 0))
-    Instrucoes = font_principal.render('Véspera de ano novo e os motoristas estão loucos, ajude a velinha a não ser atropelada!', True, (255, 0, 0))
+    Instrucoes = font_principal2.render('Véspera de ano novo e os motoristas estão loucos, ajude a velinha a não ser atropelada!', True, (255, 0, 0))
     window.blit(velha_img,(640, 500))
-    window.blit(welcome,(100, 200))
-    window.blit(Instrucoes, (100, 350))
-    window.blit(desejajogar, (100, 275))
+    window.blit(welcome,(100, 150))
+    window.blit(Instrucoes, (70, 400))
+    window.blit(desejajogar, (360, 275))
     
     running = True
     while running:
@@ -64,6 +65,7 @@ def init_screen(screen):
             if event.type == pygame.KEYUP:
                 estado = 'game'
                 if event.key == pygame.K_RETURN:
+                    pygame.mixer.music.play()
                     estado = 'game'
                     running = False
 
@@ -75,6 +77,7 @@ def init_screen(screen):
 
 def perdeu_screen(screen):
     # Variável para o ajuste de velocidade
+    pygame.mixer.music.stop()
     clock = pygame.time.Clock()
 
     # Carrega o fundo da tela inicial
@@ -252,14 +255,14 @@ while estado != 'sair':
         if len(hits) > 0:
             assets['velhaatropelada'].play()
             estado = perdeu_screen(window)
-        if contador % 300 == 0:
+        if contador % 150 == 0:
             dificuldade += 1
             moto1 = Moto(moto_img)
             todos_sprites.add(moto1)
             todos_carros_e_motos.add(moto1)
         window.fill((0, 0, 0)) 
-        if contador > 3000:
-            contador = 3001
+        if contador > 4500:
+            contador = 4501
         window.blit(background, (0, 0))
         dificuldades = 'Dificuldade: {}'.format(dificuldade)
         texto = font.render(dificuldades, True, (255, 0, 0))
