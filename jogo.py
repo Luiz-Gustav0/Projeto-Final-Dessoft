@@ -58,7 +58,9 @@ def init_screen(screen):
 
             if event.type == pygame.KEYUP:
                 estado = 'game'
-                running = False
+                if event.key == pygame.K_RETURN:
+                    estado = 'game'
+                    running = False
 
         # A cada loop, redesenha o fundo e os sprites
         screen.fill(BLACK)
@@ -66,6 +68,44 @@ def init_screen(screen):
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
 
+    return estado
+
+def perdeu_screen(screen):
+    # Variável para o ajuste de velocidade
+    clock = pygame.time.Clock()
+
+    # Carrega o fundo da tela inicial
+    window = pygame.display.set_mode((WIDTH, HEIGHT))
+    window.fill((255, 255, 255))
+    textoperdeu = font_principal.render('Voce perdeu!', True, (0, 255, 0))
+    querjogardnv = font_principal.render('Aperte qualquer tecla para jogar novamente!', True, (0, 255, 0))
+
+    window.blit(textoperdeu, (100, 100))
+    window.blit(querjogardnv, (400, 200))
+
+    running = True
+    while running:
+
+        # Ajusta a velocidade do jogo.
+        clock.tick(FPS)
+
+        # Processa os eventos (mouse, teclado, botão, etc).
+        for event in pygame.event.get():
+            # Verifica se foi fechado.
+            if event.type == pygame.QUIT:
+                estado = 'sair'
+                running = False
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_RETURN:
+                    estado = 'game'
+                    running = False
+
+        # A cada loop, redesenha o fundo e os sprites
+        screen.fill(BLACK)
+
+        # Depois de desenhar tudo, inverte o display.
+        pygame.display.flip()
     return estado
 
 # Classe para criação do personagem principal
@@ -205,6 +245,28 @@ while estado != 'sair':
     while estado == 'inicial':
         estado = init_screen(window)
     while estado == 'game':
+        window = pygame.display.set_mode((1280,720))
+        pygame.display.set_caption('Crazy Drivers!')
+        todos_sprites.update()
+        hits = pygame.sprite.spritecollide(velha1, todos_carros_e_motos, True, collided=pygame.sprite.collide_mask)
+        if len(hits) > 0:
+            estado = perdeu_screen(window)
+        if contador % 300 == 0:
+            dificuldade += 1
+            moto1 = Moto(moto_img)
+            todos_sprites.add(moto1)
+            todos_carros_e_motos.add(moto1)
+        window.fill((0, 0, 0)) 
+        if contador > 1500:
+            contador = 1501
+        window.blit(background, (0, 0))
+        dificuldades = 'Dificuldade: {}'.format(dificuldade)
+        texto = font.render(dificuldades, True, (255, 0, 0))
+        window.blit(texto, (100, 100))
+        todos_sprites.draw(window)
+
+        # ----- Atualiza estado do jogo
+        pygame.display.update()  # Mostra o novo frame para o jogador
         contador += 1
         clock.tick(FPS)
         # ----- Trata eventos
@@ -234,26 +296,6 @@ while estado != 'sair':
                     velha1.speedy += 8
                 if event.key == pygame.K_DOWN:
                     velha1.speedy -= 8
-
-    # ----- Gera saídas
-    todos_sprites.update()
-    hits = pygame.sprite.spritecollide(velha1, todos_carros_e_motos, True, collided=pygame.sprite.collide_mask)
-    if len(hits) > 0:
-        estado = 'perdeu'
-    if contador % 300 == 0:
-        dificuldade += 1
-        moto1 = Moto(moto_img)
-        todos_sprites.add(moto1)
-        todos_carros_e_motos.add(moto1)
-    window.fill((0, 0, 0))  # Preenche com a cor azul
-    if contador > 1500:
-        contador = 1501
-    window.blit(background, (0, 0))
-    dificuldade = 'Dificuldade: {}'.format(dificuldade)
-    texto = font.render(dificuldade, True, (255, 0, 0))
-    window.blit(texto, (100, 100))
-    todos_sprites.draw(window)
-
     # ----- Atualiza estado do jogo
     pygame.display.update()  # Mostra o novo frame para o jogador
 
