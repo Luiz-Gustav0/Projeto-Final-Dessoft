@@ -37,7 +37,7 @@ def init_screen(screen):
 
     # Carrega o fundo da tela inicial
     window = pygame.display.set_mode((WIDTH, HEIGHT))
-    window.fill((255, 255, 255))
+    window.fill((0, 0, 0))
     welcome = font_principal.render('Welcome to Crazy Drivers!', True, (255, 0, 0))
     desejajogar = font_principal.render('Aperte ENTER para iniciar!', True, (255, 0, 0))
     window.blit(background, (0, 0))
@@ -45,8 +45,8 @@ def init_screen(screen):
     window.blit(welcome,(100, 300))
     window.blit(desejajogar, (100, 400))
     
-    running = True
-    while running:
+    tela_inicial = True
+    while tela_inicial:
 
         # Ajusta a velocidade do jogo.
         clock.tick(FPS)
@@ -56,13 +56,13 @@ def init_screen(screen):
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
                 estado = 'sair'
-                running = False
+                tela_inicial = False
 
             if event.type == pygame.KEYUP:
                 estado = 'game'
                 if event.key == pygame.K_RETURN:
                     estado = 'game'
-                    running = False
+                    tela_inicial = False
 
         # A cada loop, redesenha o fundo e os sprites
         screen.fill(BLACK)
@@ -79,7 +79,7 @@ def perdeu_screen(screen):
     # Carrega o fundo da tela inicial
     window = pygame.display.set_mode((WIDTH, HEIGHT))
     textoperdeu = font_principal.render('Voce perdeu!', True, (0, 255, 0))
-    querjogardnv = font_principal.render('Aperte ENTER para jogar novamente!', True, (0, 255, 0))
+    querjogardnv = font_principal.render('Aperte qualquer tecla para jogar novamente!', True, (0, 255, 0))
     window.blit(background, (0, 0))
     window.blit(textoperdeu, (100, 300))
     window.blit(querjogardnv, (100, 400))
@@ -94,12 +94,12 @@ def perdeu_screen(screen):
         for event in pygame.event.get():
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
-                pygame.quit()
+                estado = 'sair'
                 running = False
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_RETURN:
-                    estado = init_screen(window)
+                    estado = 'game'
                     running = False
 
 
@@ -256,8 +256,8 @@ while estado != 'sair':
             todos_sprites.add(moto1)
             todos_carros_e_motos.add(moto1)
         window.fill((0, 0, 0)) 
-        if contador > 1500:
-            contador = 1501
+        if contador > 3000:
+            contador = 3001
         window.blit(background, (0, 0))
         dificuldades = 'Dificuldade: {}'.format(dificuldade)
         texto = font.render(dificuldades, True, (255, 0, 0))
