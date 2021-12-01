@@ -43,8 +43,8 @@ def init_screen(screen):
     window.blit(welcome,(100, 300))
     window.blit(desejajogar, (100, 400))
     
-    tela_inicial = True
-    while tela_inicial:
+    running = True
+    while running:
 
         # Ajusta a velocidade do jogo.
         clock.tick(FPS)
@@ -54,13 +54,13 @@ def init_screen(screen):
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
                 estado = 'sair'
-                tela_inicial = False
+                running = False
 
             if event.type == pygame.KEYUP:
                 estado = 'game'
                 if event.key == pygame.K_RETURN:
                     estado = 'game'
-                    tela_inicial = False
+                    running = False
 
 
         # Depois de desenhar tudo, inverte o display.
