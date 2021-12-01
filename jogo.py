@@ -74,8 +74,8 @@ def perdeu_screen(screen):
 
     # Carrega o fundo da tela inicial
     window = pygame.display.set_mode((WIDTH, HEIGHT))
-    textoperdeu = font_principal.render('Voce perdeu!', True, (0, 255, 0))
-    querjogardnv = font_principal.render('Aperte qualquer tecla para jogar novamente!', True, (0, 255, 0))
+    textoperdeu = font_principal.render('Voce perdeu!', True, (255, 0, 0))
+    querjogardnv = font_principal.render('Aperte qualquer tecla para jogar novamente!', True, (255, 0, 0))
     window.blit(background, (0, 0))
     window.blit(textoperdeu, (100, 300))
     window.blit(querjogardnv, (100, 400))
@@ -90,12 +90,12 @@ def perdeu_screen(screen):
         for event in pygame.event.get():
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
-                estado = 'sair'
+                pygame.quit()
                 running = False
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_RETURN:
-                    estado = 'game'
+                    estado = init_screen(window)
                     running = False
 
 
