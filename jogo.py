@@ -39,9 +39,11 @@ def init_screen(screen):
     window = pygame.display.set_mode((WIDTH, HEIGHT))
     window.fill((255, 255, 255))
     welcome = font_principal.render('Welcome to Crazy Drivers!', True, (255, 0, 0))
-    desejajogar = font_principal.render('Aperte uma tecla para iniciar!', True, (255, 0, 0))
-    window.blit(welcome,(100, 100))
-    window.blit(desejajogar, (400, 200))
+    desejajogar = font_principal.render('Aperte ENTER para iniciar!', True, (255, 0, 0))
+    window.blit(background, (0, 0))
+    window.blit(velha_img,(640, 500))
+    window.blit(welcome,(100, 300))
+    window.blit(desejajogar, (100, 400))
     
     running = True
     while running:
@@ -76,12 +78,11 @@ def perdeu_screen(screen):
 
     # Carrega o fundo da tela inicial
     window = pygame.display.set_mode((WIDTH, HEIGHT))
-    window.fill((255, 255, 255))
     textoperdeu = font_principal.render('Voce perdeu!', True, (0, 255, 0))
-    querjogardnv = font_principal.render('Aperte qualquer tecla para jogar novamente!', True, (0, 255, 0))
-
-    window.blit(textoperdeu, (100, 100))
-    window.blit(querjogardnv, (400, 200))
+    querjogardnv = font_principal.render('Aperte ENTER para jogar novamente!', True, (0, 255, 0))
+    window.blit(background, (0, 0))
+    window.blit(textoperdeu, (100, 300))
+    window.blit(querjogardnv, (100, 400))
 
     running = True
     while running:
@@ -93,16 +94,14 @@ def perdeu_screen(screen):
         for event in pygame.event.get():
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
-                estado = 'sair'
+                pygame.quit()
                 running = False
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_RETURN:
-                    estado = 'game'
+                    estado = init_screen(window)
                     running = False
 
-        # A cada loop, redesenha o fundo e os sprites
-        screen.fill(BLACK)
 
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
