@@ -212,7 +212,7 @@ while estado != 'sair':
         contador = 1501
     window.blit(background, (0, 0))
     dificuldade = 'Dificuldade: {}'.format(dificuldade)
-    texto = font.render(dificuldade, True, (0, 255, 0))
+    texto = font.render(dificuldade, True, (255, 0, 0))
     window.blit(texto, (100, 100))
     todos_sprites.draw(window)
 
