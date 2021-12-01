@@ -19,15 +19,15 @@ game = True
 dificuldade = 0
 font = pygame.font.SysFont(None, 48)
 assets = {}
-background = pygame.image.load('Projeto-Final-Dessoft/imagens/background.png').convert()
+background = pygame.image.load('imagens/background.png').convert()
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
-velha_img = pygame.image.load('Projeto-Final-Dessoft/imagens/velinha.png').convert_alpha()
+velha_img = pygame.image.load('imagens/velinha.png').convert_alpha()
 velha_img = pygame.transform.scale(velha_img, (75, 75))
-moto_img = pygame.image.load('Projeto-Final-Dessoft/imagens/imgem_moto.png').convert_alpha()
+moto_img = pygame.image.load('imagens/imgem_moto.png').convert_alpha()
 moto_img = pygame.transform.scale(moto_img, (100, 100))
-carro1_img = pygame.image.load('Projeto-Final-Dessoft/imagens/Imagem_Carro_2.png').convert_alpha()
+carro1_img = pygame.image.load('imagens/Imagem_Carro_2.png').convert_alpha()
 carro1_img = pygame.transform.scale(carro1_img, (150, 150))
-carro2_img = pygame.image.load('Projeto-Final-Dessoft/imagens/imagem_carro.png').convert_alpha()
+carro2_img = pygame.image.load('imagens/imagem_carro.png').convert_alpha()
 carro2_img = pygame.transform.scale(carro2_img, (115, 115))
 
 # Classe para criação do personagem principal
@@ -124,8 +124,7 @@ class Carro2(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         posicoes = [0, 1280]
         self.rect.y = random.choice(posicoes)
-        if self.rect.y == -150:
-            self.speedy = random.randint(3,4)
+        self.speedy = random.randint(3,4)
         if self.rect.y == 1280:
             self.speedy = random.randint(-4,-3)
         self.rect.x = random.randint(250,525)
