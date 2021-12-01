@@ -24,9 +24,9 @@ background = pygame.transform.scale(background, (WIDTH, HEIGHT))
 velha_img = pygame.image.load('Projeto-Final-Dessoft/imagens/velinha.png').convert_alpha()
 velha_img = pygame.transform.scale(velha_img, (75, 75))
 moto_img = pygame.image.load('Projeto-Final-Dessoft/imagens/imgem_moto.png').convert_alpha()
-moto_img = pygame.transform.scale(moto_img, (100, 100))
+moto_img = pygame.transform.scale(moto_img, (75, 75))
 carro1_img = pygame.image.load('Projeto-Final-Dessoft/imagens/Imagem_Carro_2.png').convert_alpha()
-carro1_img = pygame.transform.scale(carro1_img, (150, 150))
+carro1_img = pygame.transform.scale(carro1_img, (125, 125))
 carro2_img = pygame.image.load('Projeto-Final-Dessoft/imagens/imagem_carro.png').convert_alpha()
 carro2_img = pygame.transform.scale(carro2_img, (115, 115))
 
@@ -48,12 +48,12 @@ class velha(pygame.sprite.Sprite):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
         # Mantem dentro da tela
-        if self.rect.right > WIDTH:
-            self.rect.right = WIDTH
-        if self.rect.left < 0:
-            self.rect.left = 0
-        if self.rect.y > 610:
-            self.rect.y = 610
+        if self.rect.right > 860:
+            self.rect.right = 860
+        if self.rect.left < 360:
+            self.rect.left = 360
+        if self.rect.y > 630:
+            self.rect.y = 630
         if self.rect.y < 0:
             self.rect.y = 0
 
@@ -89,13 +89,13 @@ class Carro1(pygame.sprite.Sprite):
 
         self.image = carro1_img
         self.rect = self.image.get_rect()
-        posicoes = [-150, 1280]
+        posicoes = [0, 1280]
         self.rect.x = random.choice(posicoes)
-        if self.rect.x == -150:
-            self.speedx = random.randint(2,4)
+        if self.rect.x == 0:
+            self.speedx = random.randint(5,6)
         if self.rect.x == 1280:
-            self.speedx = random.randint(-3,-2)
-        self.rect.y = random.randint(250,525)
+            self.speedx = random.randint(-6,-5)
+        self.rect.y = random.randint(50,100)
         self.speedy = 0
 
     def update(self):
@@ -108,9 +108,9 @@ class Carro1(pygame.sprite.Sprite):
             posicoes = [-150, 1280]
             self.rect.x = random.choice(posicoes)
             if self.rect.x == -150:
-                self.speedx = random.randint(1,3)
+                self.speedx = random.randint(5,6)
             if self.rect.x == 1280:
-                self.speedx = random.randint(-3,-1)
+                self.speedx = random.randint(-6,-5)
             self.rect.y = random.randint(250,525)
             self.speedy = 0
 
@@ -122,10 +122,10 @@ class Carro2(pygame.sprite.Sprite):
 
         self.image = carro2_img
         self.rect = self.image.get_rect()
-        posicao = random.choice([[0, random.randint(3,4)],[720, random.randint(-4,-3)]])
+        posicao = random.choice([[0, random.randint(3,4)],[HEIGHT, random.randint(-4,-3)]])
         self.rect.y = posicao[0]
         self.speedy = posicao[1]
-        self.rect.x = random.randint(250,525)
+        self.rect.x = random.randint(400,700)
         self.speedx = 0
 
     def update(self):
@@ -138,7 +138,7 @@ class Carro2(pygame.sprite.Sprite):
             posicao = random.choice([[0, random.randint(3,4)],[HEIGHT, random.randint(-4,-3)]])
             self.rect.y = posicao[0]
             self.speedy = posicao[1]
-            self.rect.x = random.randint(250,525)
+            self.rect.x = random.randint(400,700)
             self.speedx = 0
 
 clock = pygame.time.Clock()
@@ -148,8 +148,8 @@ todos_carros_e_motos = pygame.sprite.Group()
 velha1 = velha(velha_img)
 moto1 = Moto(moto_img)
 carro1 = Carro1(carro1_img)
-carro2 = Carro2(carro2_img)
 carro3 = Carro1(carro1_img)
+carro2 = Carro2(carro2_img)
 todos_carros_e_motos.add(carro1)
 todos_carros_e_motos.add(carro2)
 todos_carros_e_motos.add(carro3)
@@ -204,7 +204,6 @@ while game:
         todos_sprites.add(moto1)
         todos_carros_e_motos.add(moto1)
     window.fill((0, 0, 0))  # Preenche com a cor azul
-    window.fill((0, 0, 0))  # Preenche com a cor branca
     if contador > 1500:
         contador = 1501
     window.blit(background, (0, 0))
