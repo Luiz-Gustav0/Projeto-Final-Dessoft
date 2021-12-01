@@ -36,11 +36,9 @@ def init_screen(screen):
     clock = pygame.time.Clock()
 
     # Carrega o fundo da tela inicial
-    window = pygame.display.set_mode((WIDTH, HEIGHT))
     window.fill((0, 0, 0))
     welcome = font_principal.render('Welcome to Crazy Drivers!', True, (255, 0, 0))
     desejajogar = font_principal.render('Aperte ENTER para iniciar!', True, (255, 0, 0))
-    window.blit(background, (0, 0))
     window.blit(velha_img,(640, 500))
     window.blit(welcome,(100, 300))
     window.blit(desejajogar, (100, 400))
@@ -64,8 +62,6 @@ def init_screen(screen):
                     estado = 'game'
                     tela_inicial = False
 
-        # A cada loop, redesenha o fundo e os sprites
-        screen.fill(BLACK)
 
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
