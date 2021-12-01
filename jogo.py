@@ -30,6 +30,9 @@ carro1_img = pygame.image.load('Projeto-Final-Dessoft/imagens/Imagem_Carro_2.png
 carro1_img = pygame.transform.scale(carro1_img, (125, 125))
 carro2_img = pygame.image.load('Projeto-Final-Dessoft/imagens/imagem_carro.png').convert_alpha()
 carro2_img = pygame.transform.scale(carro2_img, (115, 115))
+pygame.mixer.music.load('Projeto-Final-Dessoft/sons/musicadefundo.mp3')
+pygame.mixer.music.set_volume(0.4)
+assets['velhaatropelada'] = pygame.mixer.Sound('Projeto-Final-Dessoft/sons/velhaatropelada.mp3')
 
 def init_screen(screen):
     # Variável para o ajuste de velocidade
@@ -245,6 +248,7 @@ while estado != 'sair':
         todos_sprites.update()
         hits = pygame.sprite.spritecollide(velha1, todos_carros_e_motos, True, collided=pygame.sprite.collide_mask)
         if len(hits) > 0:
+            assets['velhaatropelada'].play()
             estado = perdeu_screen(window)
         if contador % 300 == 0:
             dificuldade += 1
