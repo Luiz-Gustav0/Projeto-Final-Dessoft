@@ -32,7 +32,7 @@ carro2_img = pygame.image.load('Projeto-Final-Dessoft/imagens/imagem_carro.png')
 carro2_img = pygame.transform.scale(carro2_img, (115, 115))
 pygame.mixer.music.load('Projeto-Final-Dessoft/sons/musicadefundo.mp3')
 pygame.mixer.music.set_volume(0.4)
-assets['velhaatropelada'] = pygame.mixer.Sound('Projeto-Final-Dessoft/sons/velhaatropelada.mp3')
+assets['velhaatropelada'] = pygame.mixer.Sound('Projeto-Final-Dessoft/sons/velhaatropelada.wav')
 
 def init_screen(screen):
     # Variável para o ajuste de velocidade
