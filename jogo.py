@@ -30,6 +30,39 @@ carro1_img = pygame.transform.scale(carro1_img, (125, 125))
 carro2_img = pygame.image.load('Projeto-Final-Dessoft/imagens/imagem_carro.png').convert_alpha()
 carro2_img = pygame.transform.scale(carro2_img, (115, 115))
 
+def init_screen(screen):
+    # Variável para o ajuste de velocidade
+    clock = pygame.time.Clock()
+
+    # Carrega o fundo da tela inicial
+    window = pygame.display.set_mode((WIDTH, HEIGHT))
+    window.fill((255, 255, 255))
+
+    running = True
+    while running:
+
+        # Ajusta a velocidade do jogo.
+        clock.tick(FPS)
+
+        # Processa os eventos (mouse, teclado, botão, etc).
+        for event in pygame.event.get():
+            # Verifica se foi fechado.
+            if event.type == pygame.QUIT:
+                estado = 'sair'
+                running = False
+
+            if event.type == pygame.KEYUP:
+                estado = 'game'
+                running = False
+
+        # A cada loop, redesenha o fundo e os sprites
+        screen.fill(BLACK)
+
+        # Depois de desenhar tudo, inverte o display.
+        pygame.display.flip()
+
+    return estado
+
 # Classe para criação do personagem principal
 class velha(pygame.sprite.Sprite):
     def __init__(self, img):
@@ -165,7 +198,7 @@ contador = 0
 estado = 'inicial'
 while estado != 'sair':
     while estado == 'inicial':
-        estado = 'game'
+        estado = init_screen(window)
     while estado == 'game':
         contador += 1
         clock.tick(FPS)
@@ -173,7 +206,7 @@ while estado != 'sair':
         for event in pygame.event.get():
             # ----- Verifica consequências
             if event.type == pygame.QUIT:
-                estado = 'sair'
+                pygame.quit()
         # Verifica se apertou alguma tecla.
             if event.type == pygame.KEYDOWN:
         # Dependendo da tecla, altera a velocidade.
@@ -201,7 +234,7 @@ while estado != 'sair':
     todos_sprites.update()
     hits = pygame.sprite.spritecollide(velha1, todos_carros_e_motos, True, collided=pygame.sprite.collide_mask)
     if len(hits) > 0:
-        estado = 'inicial'
+        estado = 'perdeu'
     if contador % 300 == 0:
         dificuldade += 1
         moto1 = Moto(moto_img)
