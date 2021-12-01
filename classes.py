@@ -1,7 +1,7 @@
 import pygame
 import random
 
-
+pygame.init()
 window = pygame.display.set_mode((1280,720))
 pygame.display.set_caption('Crazy Drivers!')
 WIDTH = 1280
