@@ -193,7 +193,7 @@ class Carro2(pygame.sprite.Sprite):
 
         self.image = carro2_img
         self.rect = self.image.get_rect()
-        posicao = random.choice([[0, random.randint(3,4)],[HEIGHT, random.randint(-4,-3)]])
+        posicao = random.choice([[-100, random.randint(3,4)],[HEIGHT, random.randint(-4,-3)]])
         self.rect.y = posicao[0]
         self.speedy = posicao[1]
         self.rect.x = random.randint(400,700)
@@ -206,7 +206,7 @@ class Carro2(pygame.sprite.Sprite):
         # Se o carro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
         if self.rect.bottom < 0 or self.rect.top > HEIGHT:
-            posicao = random.choice([[0, random.randint(3,4)],[HEIGHT, random.randint(-4,-3)]])
+            posicao = random.choice([[-100, random.randint(3,4)],[HEIGHT, random.randint(-4,-3)]])
             self.rect.y = posicao[0]
             self.speedy = posicao[1]
             self.rect.x = random.randint(400,700)
